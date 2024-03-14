@@ -256,7 +256,9 @@ func setConfigDefaults(config *$.restConfig|raw$) error {
 	gv := $.SchemeGroupVersion|raw$
 	config.GroupVersion =  &gv
 	config.APIPath = $.apiPath$
-	config.NegotiatedSerializer = scheme.Codecs.WithoutConversion()
+	if(config.NegotiatedSerializer == nil) {
+		config.NegotiatedSerializer = scheme.Codecs.WithoutConversion()
+	}
 
 	if config.UserAgent == "" {
 		config.UserAgent = $.restDefaultKubernetesUserAgent|raw$()
